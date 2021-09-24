@@ -2,6 +2,7 @@ package com.tonicapp.movieapp.api
 
 import com.tonicapp.movieapp.BuildConfig
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface MovieApi {
 
@@ -11,5 +12,7 @@ interface MovieApi {
     }
 
     @GET("movie/now_playing?api_key=$API_KEY")
-    suspend fun getNowPlayingMovies(): MovieResponse
+    suspend fun getNowPlayingMovies(
+        @Query("page") position: Int
+    ): MovieResponse
 }

@@ -6,4 +6,5 @@
     <string name="text_data_not_loaded">Data can\'t be load</string>
     <string name="text_movie">Movie</string>
     <string name="text_favorite">Favorite</string>
+    <string name="text_result_could_not_be_loaded">Result could not be loaded</string>
 </resources>

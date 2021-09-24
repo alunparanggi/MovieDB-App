@@ -30,7 +30,10 @@ class MovieFragment : Fragment() {
 
         val adapter = MovieAdapter()
         binding.apply {
-            rvMovie.adapter = adapter
+            rvMovie.adapter = adapter.withLoadStateHeaderAndFooter(
+                header = MovieLoadStateAdapter {adapter.retry()},
+                footer = MovieLoadStateAdapter {adapter.retry()}
+            )
             rvMovie.setHasFixedSize(true)
         }
         viewModel.movies.observe(viewLifecycleOwner){

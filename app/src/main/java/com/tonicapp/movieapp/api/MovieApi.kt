@@ -15,4 +15,10 @@ interface MovieApi {
     suspend fun getNowPlayingMovies(
         @Query("page") position: Int
     ): MovieResponse
+
+    @GET("search/movie?api_key=$API_KEY")
+    suspend fun searchMovie(
+        @Query("query") query : String,
+        @Query("page") position: Int
+    ) : MovieResponse
 }

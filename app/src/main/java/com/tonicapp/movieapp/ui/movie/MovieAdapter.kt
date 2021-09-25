@@ -12,7 +12,7 @@ import com.tonicapp.movieapp.R
 import com.tonicapp.movieapp.data.model.Movie
 import com.tonicapp.movieapp.databinding.ItemMovieBinding
 
-class MovieAdapter : PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(COMPARATOR) {
+class MovieAdapter(private val listener : OnItemClickListener) : PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(COMPARATOR) {
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val currentItem = getItem(position)
@@ -26,8 +26,21 @@ class MovieAdapter : PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(COMP
         return MovieViewHolder(binding)
     }
 
-    class MovieViewHolder(private val binding: ItemMovieBinding) :
+    inner class MovieViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION){
+                    val item = getItem(position)
+                    if (item!=null){
+                        listener.onItemClick(item)
+                    }
+                }
+            }
+        }
+
         fun bind(movie: Movie) {
             with(binding) {
                 Glide.with(itemView)
@@ -49,6 +62,10 @@ class MovieAdapter : PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(COMP
             override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean =
                 oldItem == newItem
         }
+    }
+
+    interface OnItemClickListener{
+        fun onItemClick(movie: Movie)
     }
 
 }

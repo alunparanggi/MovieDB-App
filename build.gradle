@@ -10,6 +10,8 @@ buildscript {
         hiltAndroidXVersion = '1.0.0-alpha03'
         pagingVersion = '3.1.0-alpha03'
         retrofitVersion = '2.9.0'
+        roomVersion = '2.2.1'
+        archLifecycleVersion = '2.3.1'
     }
 
     repositories {
